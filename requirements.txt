@@ -6,3 +6,5 @@ s3fs
 botocore
 boto3
 aiobotocore
+torch
+jsonlines

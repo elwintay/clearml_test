@@ -152,8 +152,10 @@ if __name__ == '__main__':
 
     task = Task.init(project_name='GTT', task_name='baseGTT', output_uri="s3://experiment-logging/storage/")
     clearlogger = task.get_logger()
-    task.set_base_docker("nvcr.io/nvidia/pytorch:20.06-py3")
+    task.set_base_docker("nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04")
     task.execute_remotely(queue_name="default", exit_process=True)
+
+    print(os.getcwd())
 
     #Download Pretrained Models
     bucket_ops.download_folder(
