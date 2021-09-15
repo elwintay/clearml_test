@@ -1,0 +1,8 @@
+pytorch-lightning==0.7.1
+#transformers==4.9.2
+seqeval
+clearml
+s3fs
+botocore
+boto3
+aiobotocore
