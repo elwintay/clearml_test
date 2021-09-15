@@ -15,7 +15,6 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from transformer_base import BaseTransformer, add_generic_args, generic_train
 from utils_gtt import convert_examples_to_features, get_labels, read_examples_from_file, read_golds_from_test_file, not_sub_string, incident_token_to_type
-import boto3
 
 role_list = ["incident_type", "PerpInd", "PerpOrg", "Target", "Victim", "Weapon"]
 
