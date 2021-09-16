@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import argparse
+from pathlib import Path
 
 class bucket_ops:
     StorageManager.set_cache_file_limit(5, cache_context=None)
@@ -15,6 +16,7 @@ class bucket_ops:
         print("Uploaded {}".format(local_path))
 
     def download_folder(local_path:str, remote_path:str):
+        Path(local_path).mkdir(parents=True, exist_ok=True)
         StorageManager.download_folder(remote_path, local_path, match_wildcard=None, overwrite=True)
         print("Downloaded {}".format(remote_path))
     
@@ -150,10 +152,14 @@ if __name__ == '__main__':
     # parser = NERTransformer.add_model_specific_args(parser, os.getcwd())
     args = parser.parse_args()
 
-    task = Task.init(project_name='GTT', task_name='baseGTT', output_uri="s3://experiment-logging/storage/")
+    task = Task.init(project_name='GTT-test', task_name='baseGTT-1', output_uri="s3://experiment-logging/storage/")
     clearlogger = task.get_logger()
+    # aip_config = json.load(open("aip_config.json"))
+    # task.set_base_docker("nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04 --env AWS_ACCESS_KEY={} --env AWS_SECRET_ACCESS={}".format(aip_config['aws_user'],aip_config['aws_pass']))
+    # task.set_base_docker("nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04 --env AWS_ACCESS_KEY=AKIA2RXNV3G6BGGPBRUN --env AWS_SECRET_ACCESS=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".format(aip_config['aws_user'],aip_config['aws_pass']))
+    # task.set_base_docker("pure/python:3.6-cuda10.2-cudnn7-runtime")
     task.set_base_docker("nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04")
-    task.execute_remotely(queue_name="default", exit_process=True)
+    task.execute_remotely(queue_name="elwin", exit_process=True)
 
     print(os.getcwd())
 
